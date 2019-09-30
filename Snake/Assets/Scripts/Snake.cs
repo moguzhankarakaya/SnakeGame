@@ -22,7 +22,7 @@ public class Snake : MonoBehaviour
     {
         gridPos            = new Vector2Int(10, 10);
         gridMoveDir        = new Vector2Int(1, 0);
-        gridMoveTimerMax   = .1f;
+        gridMoveTimerMax   = .25f;
         gridMoveTimer      = gridMoveTimerMax;
         snakeSize          = 0;
         snakeBodyPositions = new List<Vector2Int>();
@@ -118,14 +118,26 @@ public class Snake : MonoBehaviour
 
     private void CreateSnakeBody()
     {
-        GameObject snakeBodyObject = new GameObject("SnakeBody", typeof(SpriteRenderer));
-        snakeBodyObject.GetComponent<SpriteRenderer>().sprite = GameAssets.instance.snakeBodySprite;
-        snakeBodyTranforms.Add(snakeBodyObject.transform);
+
     }
 
     private float CalculateHeadRotation()
     {
         float eulerZ = Mathf.Atan2(gridMoveDir.y, gridMoveDir.x) * Mathf.Rad2Deg;
         return (eulerZ < 0) ? (eulerZ + 360) : eulerZ;
+    }
+
+
+    private class SnakeBody
+    {
+        private Transform transform;
+        public SnakeBody(int sortingIndex)
+        {
+            GameObject snakeBodyObject = new GameObject("SnakeBody", typeof(SpriteRenderer));
+            snakeBodyObject.GetComponent<SpriteRenderer>().sprite = GameAssets.instance.snakeBodySprite;
+            snakeBodyObject.GetComponent<SpriteRenderer>().sortingOrder = -sortingIndex;
+            transform = snakeBodyObject.transform;
+        }
+
     }
 }
