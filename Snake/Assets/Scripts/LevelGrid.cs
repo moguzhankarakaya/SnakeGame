@@ -4,7 +4,7 @@ using UnityEngine;
 using CodeMonkey;
 using CodeMonkey.Utils;
 
-public class LevelGrid : MonoBehaviour
+public class LevelGrid
 {
     private Vector2Int foodPosition;
     private GameObject foodGameObj;
@@ -44,5 +44,20 @@ public class LevelGrid : MonoBehaviour
             return true;
         }
         return false;
+    }
+
+    public Vector2Int getValidGridPosition(Vector2Int gridPosition)
+    {
+        if (gridPosition.x < 0)
+            gridPosition.x = width;
+        else if (gridPosition.x > width)
+            gridPosition.x = 0;
+
+        if (gridPosition.y < 0)
+            gridPosition.y = height;
+        else if (gridPosition.y > height)
+            gridPosition.y = 0;
+
+        return gridPosition;
     }
 }
