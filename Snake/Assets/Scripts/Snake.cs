@@ -147,8 +147,8 @@ public class Snake : MonoBehaviour
             {
                 if (gridPos == snakeBodyPart.getPosition())
                 {
-                    CMDebug.TextPopup("GAME OVER", transform.position );
                     state = SnakeState.DEAD;
+                    GameHandler.gameOver();
                 }
             }
 

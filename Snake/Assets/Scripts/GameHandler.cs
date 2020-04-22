@@ -7,8 +7,18 @@ using CodeMonkey.Utils;
 
 public class GameHandler : MonoBehaviour
 {
+    private static GameHandler instance;
+
+    private static int score;
+    private LevelGrid  levelGrid;
+
     [SerializeField] private Snake snake;
-    private LevelGrid levelGrid;
+
+    private void Awake()
+    {
+        instance = this;
+        resetScore();
+    }
 
     void Start()
     {
@@ -22,5 +32,25 @@ public class GameHandler : MonoBehaviour
     void Update()
     {
         
+    }
+
+    public static void resetScore()
+    {
+        score = 0;
+    }
+
+    public static int getScore()
+    {
+        return score;
+    }
+
+    public static void incrementScore()
+    {
+        score += 100;
+    }
+
+    public static void gameOver()
+    {
+        GameOverWindow.ShowGameOverUI();
     }
 }
